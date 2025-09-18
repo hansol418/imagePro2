@@ -71,4 +71,6 @@ public:
 	void Flip();
 	void ZoomIn_2();
 	void ZoomIn_3();
+	void ZoomOut();
+	void Rotate();
 };

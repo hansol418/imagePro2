@@ -65,6 +65,8 @@ public:
 	afx_msg void OnZoomin1();
 	afx_msg void OnCopyInter();
 	afx_msg void OnZoomin3();
+	afx_msg void OnZoomout();
+	afx_msg void OnRotate();
 };
 
 #ifndef _DEBUG  // imageProView.cpp의 디버그 버전

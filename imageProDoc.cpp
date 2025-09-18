@@ -573,3 +573,80 @@ void CimageProDoc::ZoomIn_3()
 		}
 
 }
+
+void CimageProDoc::ZoomOut()
+{
+	// TODO: 여기에 구현 코드 추가.
+	for (int x = 0; x < 256; x += 2)
+		for (int y = 0; y < 256; y += 2)
+			ResultImg[x / 2][y / 2] = InputImg[x][y];
+}
+
+void CimageProDoc::Rotate()
+{
+	// TODO: 여기에 구현 코드 추가.
+	// 내방법1
+	const double pi = 3.141592;
+	const double deg = 45.0;
+	const double rad = deg * pi / 180.0;
+	const double cosA = cos(rad);
+	const double sinA = sin(rad);
+
+	// 중심 좌표: 0~255의 픽셀 격자 가운데는 127.5가 더 정확합니다.
+	const double cx = 127.5;
+	const double cy = 127.5;
+
+	// 배경 초기화
+	for (int x = 0; x < 256; x++)
+		for (int y = 0; y < 256; y++)
+			ResultImg[x][y] = 0;
+
+	// 목적지 (x,y) -> 원본 (sx,sy) 역매핑
+	for (int x = 0; x < 256; x++)
+	{
+		for (int y = 0; y < 256; y++)
+		{
+			double dx = x - cx;
+			double dy = y - cy;
+
+			// 역회전: R(-θ)
+			double sx = cosA * dx + sinA * dy + cx;
+			double sy = -sinA * dx + cosA * dy + cy;
+
+			// 최근접 샘플링
+			int ix = (int)round(sx);
+			int iy = (int)round(sy);
+
+			if (ix >= 0 && ix < 256 && iy >= 0 && iy < 256)
+				ResultImg[x][y] = InputImg[ix][iy];
+
+		}
+	}
+
+	//교수님 방법
+	double i = 0, j = 0, m = 0, n = 0;
+	int	x2 = 0, y2 = 0;
+	double seta = 0;
+
+	seta = pi / 6;
+
+	for (int x = 0; x < 256; x++)
+	{
+		for (int y = 0; y < 256; y++)
+		{
+			i = -1 * ((x - 128) * sin(seta)) + 128;
+			j = (y - 128) * cos(seta);
+			y2 = i + j;
+
+			m = ((y - 128) * sin(seta)) + 128;
+			n = (x - 128) * cos(seta);
+			x2 = m + n;
+
+			if (x2 >= 0 && x2 < 256 && y2 >= 0 && y2 < 256)
+				InputImg2[x][y] = InputImg[x2][y2];
+			else
+				InputImg2[x][y] = 0;
+
+		}
+	}
+}

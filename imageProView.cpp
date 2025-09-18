@@ -49,6 +49,8 @@ BEGIN_MESSAGE_MAP(CimageProView, CScrollView)
 	ON_COMMAND(ID_ZOOMIN_1, &CimageProView::OnZoomin1)
 	ON_COMMAND(ID_COPY_INTER, &CimageProView::OnCopyInter)
 	ON_COMMAND(ID_ZOOMIN_3, &CimageProView::OnZoomin3)
+	ON_COMMAND(ID_ZOOMOUT, &CimageProView::OnZoomout)
+	ON_COMMAND(ID_ROTATE, &CimageProView::OnRotate)
 END_MESSAGE_MAP()
 
 // CimageProView 생성/소멸
@@ -407,6 +409,28 @@ void CimageProView::OnZoomin3()
 	ASSERT_VALID(pDoc);
 
 	pDoc->ZoomIn_3();
+
+	Invalidate(FALSE);
+}
+
+void CimageProView::OnZoomout()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CimageProDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+
+	pDoc->ZoomOut();
+
+	Invalidate(FALSE);
+}
+
+void CimageProView::OnRotate()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CimageProDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+
+	pDoc->Rotate();
 
 	Invalidate(FALSE);
 }

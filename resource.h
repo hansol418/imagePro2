@@ -80,13 +80,17 @@
 #define ID_COPY_INTER                   32818
 #define ID_32819                        32819
 #define ID_ZOOMIN_3                     32820
+#define ID_32821                        32821
+#define ID_ZOOMOUT                      32822
+#define ID_32823                        32823
+#define ID_ROTATE                       32824
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        310
-#define _APS_NEXT_COMMAND_VALUE         32821
+#define _APS_NEXT_COMMAND_VALUE         32825
 #define _APS_NEXT_CONTROL_VALUE         1000
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
