@@ -51,6 +51,12 @@ BEGIN_MESSAGE_MAP(CimageProView, CScrollView)
 	ON_COMMAND(ID_ZOOMIN_3, &CimageProView::OnZoomin3)
 	ON_COMMAND(ID_ZOOMOUT, &CimageProView::OnZoomout)
 	ON_COMMAND(ID_ROTATE, &CimageProView::OnRotate)
+	ON_COMMAND(ID_BLURRING, &CimageProView::OnBlurring)
+	ON_COMMAND(ID_SHARPNING, &CimageProView::OnSharpning)
+	ON_COMMAND(ID_PREWITT, &CimageProView::OnPrewitt)
+	ON_COMMAND(ID_ROBERTS, &CimageProView::OnRoberts)
+	ON_COMMAND(ID_SOBEL, &CimageProView::OnSobel)
+	ON_COMMAND(ID_LAPLACIAN, &CimageProView::OnLaplacian)
 END_MESSAGE_MAP()
 
 // CimageProView 생성/소멸
@@ -431,6 +437,72 @@ void CimageProView::OnRotate()
 	ASSERT_VALID(pDoc);
 
 	pDoc->Rotate();
+
+	Invalidate(FALSE);
+}
+
+void CimageProView::OnBlurring()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CimageProDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+
+	pDoc->Blurring();
+
+	Invalidate(FALSE);
+}
+
+void CimageProView::OnSharpning()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CimageProDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+
+	pDoc->Sharpning();
+
+	Invalidate(FALSE);
+}
+
+void CimageProView::OnPrewitt()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CimageProDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+
+	pDoc->Prewitt();
+
+	Invalidate(FALSE);
+}
+
+void CimageProView::OnRoberts()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CimageProDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+
+	pDoc->Roberts();
+
+	Invalidate(FALSE);
+}
+
+void CimageProView::OnSobel()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CimageProDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+
+	pDoc->Sobel();
+
+	Invalidate(FALSE);
+}
+
+void CimageProView::OnLaplacian()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CimageProDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+
+	pDoc->Laplacian();
 
 	Invalidate(FALSE);
 }

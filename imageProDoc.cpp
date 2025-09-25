@@ -650,3 +650,241 @@ void CimageProDoc::Rotate()
 		}
 	}
 }
+
+void CimageProDoc::Blurring()
+{
+	// TODO: 여기에 구현 코드 추가.
+	int sum1 = 0;
+	int sum2 = 0;
+
+	int Mask1[3][3] = { 1, 1, 1,
+					   1, 1, 1,
+					   1, 1, 1 };
+	int Mask2[5][5] = { 1,1,1,1,1,
+					   1,1,1,1,1,
+					   1,1,1,1,1,
+					   1,1,1,1,1,
+					   1,1,1,1,1 };
+
+	for(int row = 0; row < 256; row++)
+	{ 
+		for (int column = 0; column < 256; column++)
+		{
+			for (int x = 0; x < 3; x++)
+			{
+				for (int y = 0; y < 3; y++)
+				{
+					sum1 += InputImg[row + x][column + y] * Mask1[x][y] / 9;
+				}
+			}
+			ResultImg[row + 1][column + 1] = (unsigned char)sum1;
+			sum1 = 0;
+
+			for (int x = 0; x < 5; x++)
+			{
+				for (int y = 0; y < 5; y++)
+				{
+					sum2 += InputImg[row + x][column + y] * Mask2[x][y] / 25;
+				}
+			}
+			InputImg2[row + 2][column + 2] = (unsigned char)sum2;
+			sum2 = 0;
+		}
+		
+	}
+	
+
+}
+
+void CimageProDoc::Sharpning()
+{
+	// TODO: 여기에 구현 코드 추가.
+	int sum1 = 0;
+	int sum2 = 0;
+
+	int Mask1[3][3] = { 0, -1, 0,
+					   -1, 5, -1,
+					   0, -1, 0 };
+	int Mask2[3][3] = {-1, -1, -1,
+					   -1, 9, -1,
+					   -1, -1, -1};
+
+	for (int row = 0; row < 255; row++)
+	{
+		for (int column = 0; column < 255; column++)
+		{
+			for (int x = 0; x < 3; x++)
+			{
+				for (int y = 0; y < 3; y++)
+				{
+					sum1 += InputImg[row + x][column + y] * Mask1[x][y];
+				}
+			}
+			if (sum1 > 255)
+				sum1 = 255;
+			if (sum1 < 0)
+				sum1 = 0;
+
+			ResultImg[row + 1][column + 1] = sum1;
+			sum1 = 0;
+
+			for (int x = 0; x < 3; x++)
+			{
+				for (int y = 0; y < 3; y++)
+				{
+					sum2 += InputImg[row + x][column + y] * Mask2[x][y];
+				}
+			}
+			if (sum2 > 255)
+				sum2 = 255;
+			if (sum2 < 0)
+				sum2 = 0;
+
+			InputImg2[row + 2][column + 2] = sum2;
+			sum2 = 0;
+		}
+
+	}
+}
+
+void CimageProDoc::Prewitt()
+{
+	// TODO: 여기에 구현 코드 추가.
+	int sum = 0;
+	int centerValue1 = 0;
+	int centerValue2 = 0;
+	
+	int Mask1[3][3] = { -1, -1, -1,
+					    0, 0, 0,
+					    1, 1, 1 };
+	int Mask2[3][3] = { 1, 0, -1,
+					    1, 0, -1,
+					    1, 0, -1 };
+
+	for (int row = 0; row < 255; row++)
+	{
+		for (int column = 0; column < 255; column++)
+		{
+			for (int x = 0; x < 3; x++)
+			{
+				for (int y = 0; y < 3; y++)
+				{
+					centerValue1 += InputImg[row + x][column + y] * Mask1[x][y];
+					centerValue2 += InputImg[row + x][column + y] * Mask2[x][y];
+				}
+			}
+			sum = abs(centerValue1) + abs(centerValue2);
+			if (sum > 255)
+				sum = 255;
+			ResultImg[row + 1][column + 1] = sum;
+			centerValue1 = 0;
+			centerValue2 = 0;
+			sum = 0;
+		}
+	}
+}
+
+void CimageProDoc::Roberts()
+{
+	// TODO: 여기에 구현 코드 추가.
+	int sum = 0;
+	int centerValue1 = 0;
+	int centerValue2 = 0;
+
+	int Mask1[3][3] = { -1, 0, 0,
+						0, 1, 0,
+						0, 0, 0 };
+	int Mask2[3][3] = { 0, 0, -1,
+						0, 1, 0,
+						0, 0, 0 };
+
+	for (int row = 0; row < 255; row++)
+	{
+		for (int column = 0; column < 255; column++)
+		{
+			for (int x = 0; x < 3; x++)
+			{
+				for (int y = 0; y < 3; y++)
+				{
+					centerValue1 += InputImg[row + x][column + y] * Mask1[x][y];
+					centerValue2 += InputImg[row + x][column + y] * Mask2[x][y];
+				}
+			}
+			sum = abs(centerValue1) + abs(centerValue2);
+			if (sum > 255)
+				sum = 255;
+			ResultImg[row + 1][column + 1] = sum;
+			centerValue1 = 0;
+			centerValue2 = 0;
+			sum = 0;
+		}
+	}
+}
+
+void CimageProDoc::Sobel()
+{
+	// TODO: 여기에 구현 코드 추가.
+	int sum = 0;
+	int centerValue1 = 0;
+	int centerValue2 = 0;
+
+	int Mask1[3][3] = { -1, -2, -1,
+						0, 0, 0,
+						1, 2, 1 };
+	int Mask2[3][3] = { 1, 0, -1,
+						2, 0, -2,
+						1, 0, -1 };
+
+	for (int row = 0; row < 255; row++)
+	{
+		for (int column = 0; column < 255; column++)
+		{
+			for (int x = 0; x < 3; x++)
+			{
+				for (int y = 0; y < 3; y++)
+				{
+					centerValue1 += InputImg[row + x][column + y] * Mask1[x][y];
+					centerValue2 += InputImg[row + x][column + y] * Mask2[x][y];
+				}
+			}
+			sum = abs(centerValue1) + abs(centerValue2);
+			if (sum > 255)
+				sum = 255;
+			ResultImg[row + 1][column + 1] = sum;
+			centerValue1 = 0;
+			centerValue2 = 0;
+			sum = 0;
+		}
+	}
+}
+
+void CimageProDoc::Laplacian()
+{
+	// TODO: 여기에 구현 코드 추가.
+	int sum = 0;
+	int centerValue = 0;
+
+	int Mask[3][3] = { -1, -1, -1,
+					   -1, 8, -1,
+					   -1, -1, -1 };
+	
+	for (int row = 0; row < 255; row++)
+	{
+		for (int column = 0; column < 255; column++)
+		{
+			for (int x = 0; x < 3; x++)
+			{
+				for (int y = 0; y < 3; y++)
+				{
+					centerValue += InputImg[row + x][column + y] * Mask[x][y];					
+				}
+			}
+			sum = abs(centerValue);
+			if (sum > 255)
+				sum = 255;
+			ResultImg[row + 1][column + 1] = sum;
+			centerValue = 0;
+			sum = 0;
+		}
+	}
+}

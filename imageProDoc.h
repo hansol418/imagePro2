@@ -73,4 +73,10 @@ public:
 	void ZoomIn_3();
 	void ZoomOut();
 	void Rotate();
+	void Blurring();
+	void Sharpning();
+	void Prewitt();
+	void Roberts();
+	void Sobel();
+	void Laplacian();
 };

@@ -84,13 +84,23 @@
 #define ID_ZOOMOUT                      32822
 #define ID_32823                        32823
 #define ID_ROTATE                       32824
+#define ID_BLURRING                     32825
+#define ID_SHARPNING                    32826
+#define ID_32827                        32827
+#define ID_PREWITT                      32828
+#define ID_32829                        32829
+#define ID_ROBERTS                      32830
+#define ID_32831                        32831
+#define ID_SOBEL                        32832
+#define ID_32833                        32833
+#define ID_LAPLACIAN                    32834
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        310
-#define _APS_NEXT_COMMAND_VALUE         32825
+#define _APS_NEXT_COMMAND_VALUE         32835
 #define _APS_NEXT_CONTROL_VALUE         1000
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
